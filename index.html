@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>💌 Letters for Insha</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Dancing Script', cursive;
+      color: #5c2a2a;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    video.bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.5);
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      margin-top: 40px;
+      font-size: 2.5em;
+      color: #f8d0dd;
+      text-shadow: 2px 2px 6px #000;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 40px 20px;
+    }
+
+    .envelope {
+      background: #fffafc;
+      border: 2px solid #f69acb;
+      border-radius: 20px;
+      width: 220px;
+      height: 160px;
+      cursor: pointer;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .envelope:hover {
+      transform: scale(1.05);
+    }
+
+    .flap {
+      background: #f69acb;
+      height: 40%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      border-radius: 20px 20px 0 0;
+      border-bottom: 2px solid #d6336c;
+    }
+
+    .front {
+      padding-top: 70px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #d6336c;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 999;
+    }
+
+    .modal-content {
+      background: #fffafc;
+      margin: 5% auto;
+      padding: 30px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 600px;
+      position: relative;
+      font-family: 'Dancing Script', cursive;
+      color: #722222;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      animation: popup 0.5s ease;
+    }
+
+    @keyframes popup {
+      from { transform: scale(0.6); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-content img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+      border: 5px solid #f7c6d7;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+
+    .modal-content p {
+      font-size: 1.2em;
+      line-height: 1.8;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      font-size: 28px;
+      color: #a94442;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    audio {
+      display: none;
+    }
+
+    @media screen and (max-width: 600px) {
+      .modal-content img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background video -->
+  <video autoplay loop muted class="bg-video" id="bgvid">
+    <source src="insha_bg.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Background music -->
+  <audio autoplay loop id="bgmusic">
+    <source src="Enna_Sona.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <h1>💌 Letters to Insha Firdause 💌</h1>
+
+  <div class="container">
+    <div class="envelope" onclick="openLetter('happy')">
+      <div class="flap"></div>
+      <div class="front">When You're Happy 😊</div>
+    </div>
+    <div class="envelope" onclick="openLetter('sad')">
+      <div class="flap"></div>
+      <div class="front">When You're Sad 😢</div>
+    </div>
+    <div class="envelope" onclick="openLetter('miss')">
+      <div class="flap"></div>
+      <div class="front">When You Miss Me 🥺</div>
+    </div>
+    <div class="envelope" onclick="openLetter('random')">
+      <div class="flap"></div>
+      <div class="front">Just Because 💖</div>
+    </div>
+  </div>
+
+  <div class="modal" id="letterModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeLetter()">&times;</span>
+      <img id="letterImage" src="" alt="Insha">
+      <p id="letterText"></p>
+    </div>
+  </div>
+
+  <script>
+    function openLetter(type) {
+      const letters = {
+        happy: {
+          image: "insha1.jpg",
+          text: `My shining star, Insha 🌟
+
+When you're happy, my entire world lights up. 
+Your joy is contagious and your laugh is my favorite melody. 
+May you always be this radiant — and always know that I’m smiling with you.
+
+Forever yours,  
+— Priyanshu 💖`
+        },
+        sad: {
+          image: "insha2.jpg",
+          text: `Sweetheart Insha 🥺
+
+If tears ever touch your eyes, I hope this letter reaches your heart. 
+You’re never alone — I’m right there, holding you tight in spirit. 
+Let my words be your warm hug today.
+
+With endless love,  
+— Priyanshu 💌`
+        },
+        miss: {
+          image: "insha3.jpg",
+          text: `To my heartbeat, Insha 💓
+
+Every second away from you feels like forever. 
+I miss your voice, your warmth, your everything. 
+Even in silence, my love speaks your name.
+
+Missing you madly,  
+— Priyanshu 💞`
+        },
+        random: {
+          image: "insha4.jpg",
+          text: `Just because... 💫
+
+I love you, Insha. Not for a reason. Not for a moment. But for everything you are and always will be. 
+You are not just a part of my life — you are my life.
+
+With my whole heart,  
+— Priyanshu 💗`
+        }
+      };
+
+      const selected = letters[type];
+      document.getElementById("letterImage").src = selected.image;
+      document.getElementById("letterText").innerText = selected.text;
+      document.getElementById("letterModal").style.display = "block";
+    }
+
+    function closeLetter() {
+      document.getElementById("letterModal").style.display = "none";
+    }
+  </script>
+</body>
+</html>
